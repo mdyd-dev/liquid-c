@@ -411,7 +411,7 @@ static VALUE vm_render_until_error(VALUE uncast_args)
             {
                 VALUE var_result = vm_stack_pop(vm);
                 if (vm->context.global_filter != Qnil)
-                    var_result = rb_funcall(vm->context.global_filter, id_call, 1, var_result);
+                    var_result = rb_funcall(vm->context.global_filter, id_call, 2, var_result, vm->context);
                 write_obj(output, var_result);
                 args->ip = NULL; // mark the end of a rescue block, used by vm_render_rescue
                 resource_limits_increment_write_score(vm->context.resource_limits, output);
